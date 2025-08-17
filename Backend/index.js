@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 // Force dotenv to load from Backend/.env
 dotenv.config({ path: path.resolve(__dirname, ".env") });
-console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
+// console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
 
 
 const express = require("express");

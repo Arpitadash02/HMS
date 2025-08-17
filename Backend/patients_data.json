@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Jane Doe",
+    "age": 34,
+    "admittedDate": "2025-08-16T10:00:00Z"
+  },
+  {
+    "name": "John Smith",
+    "age": 52,
+    "admittedDate": "2025-08-15T14:30:00Z"
+  },
+  {
+    "name": "Alice Johnson",
+    "age": 28,
+    "admittedDate": "2025-08-14T08:15:00Z"
+  },
+  {
+    "name": "Robert Brown",
+    "age": 67,
+    "admittedDate": "2025-08-13T11:45:00Z"
+  },
+  {
+    "name": "Emily Davis",
+    "age": 41,
+    "admittedDate": "2025-08-12T16:00:00Z"
+  }
+]
