@@ -1,5 +1,12 @@
-const express = require("express");
+const path = require("path");
 const dotenv = require("dotenv");
+
+// Force dotenv to load from Backend/.env
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
+
+
+const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 
@@ -7,9 +14,6 @@ const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
-
-// Load environment variables
-dotenv.config();
 
 // Connect to MongoDB
 connectDB();
