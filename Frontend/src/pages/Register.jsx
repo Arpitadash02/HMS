@@ -14,7 +14,7 @@ export default function Register() {
     console.log("User registered:", form);
     try{
       //call backend API with axios
-      // const response = await axios.post('/api/register', form);
+      const response = await axios.post('/api/register', form);
       const isAlreadyRegistered = false;
 
       if (isAlreadyRegistered) {
