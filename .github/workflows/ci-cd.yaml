@@ -40,8 +40,8 @@ jobs:
       - name: Build and push frontend Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: ./Frontend
+          file: ./Frontend/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/hms-frontend:latest
