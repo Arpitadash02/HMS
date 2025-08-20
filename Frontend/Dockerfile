@@ -1,5 +1,5 @@
 # Step 1: Build React app
-FROM node:20-alpine as build
+# FROM node:20-alpine as build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
