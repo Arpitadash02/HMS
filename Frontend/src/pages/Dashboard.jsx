@@ -1,0 +1,22 @@
+import React from "react";
+import { Link } from "react-router-dom";
+const departments = [
+ {name:"Cardiology", icon:"❤️", fee:900, doctors:["Dr. Aarav Mehta","Dr. Kavya Rao"]},
+ {name:"Cardiac Surgery", icon:"🫀", fee:1800, doctors:["Dr. Rohan Sen","Dr. Nisha Kapoor"]},
+ {name:"Orthopedics", icon:"🦴", fee:700, doctors:["Dr. Ishaan Das","Dr. Meera Nair"]},
+ {name:"Neurology", icon:"🧠", fee:1000, doctors:["Dr. Arjun Patel","Dr. Sana Khan"]},
+ {name:"Neurosurgery", icon:"🩺", fee:2000, doctors:["Dr. Vikram Joshi","Dr. Ananya Bose"]},
+ {name:"Pediatrics", icon:"🧸", fee:600, doctors:["Dr. Riya Sharma","Dr. Kabir Roy"]},
+ {name:"Gynecology", icon:"🌸", fee:750, doctors:["Dr. Aditi Iyer","Dr. Priya Menon"]},
+ {name:"General Medicine", icon:"🩺", fee:500, doctors:["Dr. Neel Verma","Dr. Pooja Sahu"]},
+ {name:"Dermatology", icon:"✨", fee:650, doctors:["Dr. Tara Kapoor","Dr. Dev Malhotra"]}
+];
+export default function Dashboard() {
+ const user=JSON.parse(localStorage.getItem("user")||"null");
+ const cards=[{title:"Appointments",description:"Choose a department, doctor, date and available time slot.",to:"/appointments",icon:"📅",tone:"bg-blue-50"},{title:"Patients & beds",description:"Review admission status, room allocation and current bed availability.",to:"/patients",icon:"🛏️",tone:"bg-emerald-50"},{title:"Your account",description:user?`Signed in as ${user.name} (${user.role}).`:"Create a patient account or sign in to book.",to:user?"/login":"/register",icon:"🔐",tone:"bg-violet-50"}];
+ return <div className="space-y-10">
+  <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-blue-950 via-blue-800 to-cyan-700 px-6 py-10 text-white shadow-lg sm:px-10 sm:py-14"><p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">Hospital Management System</p><h1 className="mt-3 max-w-2xl text-4xl font-extrabold tracking-tight sm:text-5xl">Care that fits your schedule.</h1><p className="mt-4 max-w-2xl leading-7 text-blue-100">Explore 9 specialties, compare consultation charges, find doctors and book an appointment. Patients can also check admission and bed availability.</p><div className="mt-7 flex flex-wrap gap-3"><Link to="/appointments" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-blue-900 hover:bg-blue-50">Book appointment</Link><Link to="/patients" className="rounded-xl border border-white/40 px-5 py-3 text-sm font-semibold hover:bg-white/10">Check bed availability</Link></div></section>
+  <section className="grid gap-4 md:grid-cols-3">{cards.map(c=><Link key={c.title} to={c.to} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className={`flex h-12 w-12 items-center justify-center rounded-xl ${c.tone} text-2xl`}>{c.icon}</div><h2 className="mt-4 text-lg font-bold text-slate-900">{c.title}</h2><p className="mt-2 text-sm leading-6 text-slate-500">{c.description}</p><span className="mt-5 inline-block text-sm font-semibold text-blue-700">Open section →</span></Link>)}</section>
+  <section><div className="mb-4"><p className="text-sm font-semibold uppercase tracking-wider text-blue-700">Find your specialist</p><h2 className="mt-1 text-2xl font-bold text-slate-900">Departments, doctors & consultation charges</h2><p className="mt-2 text-sm text-slate-500">Illustrative demo directory and INR consultation fees. Doctor availability is confirmed by the appointment booking list; demo names must be seeded/registered in the database to book.</p></div><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{departments.map((d,i)=><article key={d.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex items-start justify-between"><span className="text-3xl">{d.icon}</span><span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Consultation ₹{d.fee}</span></div><h3 className="mt-3 font-bold text-slate-900">{d.name}</h3><p className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Doctors</p>{d.doctors.map(n=><p key={n} className="mt-1 text-sm text-slate-600">{n}</p>)}<div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3"><span className="text-xs text-slate-500">Mon–Sat · 9 AM–5 PM</span><Link to="/appointments" className="text-sm font-semibold text-blue-700">Book →</Link></div></article>)}</div></section>
+ </div>;
+}

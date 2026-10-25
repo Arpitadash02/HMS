@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: hms-api
+    runtime: node
+    rootDir: Backend
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: HOSPITAL_TOTAL_BEDS
+        value: "50"
+
+  - type: web
+    name: hms-frontend
+    runtime: static
+    buildCommand: npm ci --prefix Frontend && npm run build --prefix Frontend
+    staticPublishPath: Frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
