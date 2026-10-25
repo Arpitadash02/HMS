@@ -1,5 +1,12 @@
 node_modules
+<<<<<<< HEAD
+npm-debug.log
+Dockerfile
+.dockerignore
+.env
+=======
 .env
 .env.*
 !.env.example
 npm-debug.log*
+>>>>>>> master
