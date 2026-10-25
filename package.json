@@ -1,0 +1,14 @@
+{
+  "name": "hms-root",
+  "version": "1.0.0",
+  "description": "Hospital Management System (HMS) - Root Runner",
+  "scripts": {
+    "install:all": "npm install --prefix Backend && npm install --prefix Frontend",
+    "dev:backend": "npm run start --prefix Backend",
+    "dev:frontend": "npm run dev --prefix Frontend",
+    "build:frontend": "npm run build --prefix Frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

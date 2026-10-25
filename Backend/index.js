@@ -15,12 +15,18 @@ const allowedOrigins = (process.env.CLIENT_ORIGIN || "")
 
 app.use(cors({
   origin(origin, callback) {
-    // Permit non-browser clients (curl, health checks) and configured frontend origins.
-    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+    // Permit non-browser clients (curl, mobile, health checks)
+    if (!origin) return callback(null, true);
+    // Allow any localhost / 127.0.0.1 origin or explicit CLIENT_ORIGIN
+    if (
+      allowedOrigins.includes(origin) ||
+      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+    ) {
       return callback(null, true);
     }
-    return callback(new Error("Origin not allowed by CORS"));
+    return callback(new Error(`Origin ${origin} not allowed by CORS`));
   },
+  credentials: true,
 }));
 app.use(express.json({ limit: "1mb" }));
 
@@ -32,7 +38,10 @@ app.use("/api/patients", patientRoutes);
 app.use("/api/appointments", appointmentRoutes);
 
 app.use((err, _req, res, _next) => {
-  console.error(err.message);
+  console.error("Server error:", err.message);
+  if (err.message && err.message.includes("CORS")) {
+    return res.status(403).json({ message: err.message });
+  }
   res.status(500).json({ message: "Internal server error" });
 });
 
