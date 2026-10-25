@@ -1,7 +1,18 @@
 import axios from "axios";
 
 const API = axios.create({
+<<<<<<< HEAD
   baseURL: "http://localhost:3000/api", // backend endpoint
+=======
+  baseURL: `${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/api`,
+  timeout: 15000,
+});
+
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+>>>>>>> master
 });
 
 export default API;
