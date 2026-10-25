@@ -1,5 +1,13 @@
 import React from "react";
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+=======
+<<<<<<< HEAD
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+=======
+import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import Appointments from "./pages/Appointments";
@@ -7,6 +15,49 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+function App() {
+  return (
+    <div>
+      <Router>
+      {/* Navbar */}
+      <nav className="mt-2.5 bg-amber-100 p-4 text-white shadow-md flex items-center justify-between">
+
+        <div className="text-xl font-bold text-blue-600 ">
+           <Link to="/">🏥 HMS</Link>
+        </div>
+
+        <ul className="flex space-x-20">
+          <li><Link to="/" className="hover:bg-blue-100 underline">Dashboard</Link></li>
+          <li><Link to="/patients" className="hover:bg-blue-100 underline">Patients</Link></li>
+          <li><Link to="/appointments" className="hover:bg-blue-100 underline">Appointments</Link></li>
+          <li><Link to="/Register" className="hover:bg-blue-100 underline">Register</Link></li>
+          <li><Link to="/login" className="hover:bg-blue-100 underline">Login</Link></li>
+        </ul>
+      </nav>
+
+      {/* Routes */}
+      <div className="p-6">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/patients" element={<Patients />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
+    </div>
+    
+  );
+}
+
+export default App;
+
+=======
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 function Navigation() {
   const navigate=useNavigate(); const location=useLocation();
   const user=JSON.parse(localStorage.getItem("user")||"null");
@@ -22,3 +73,7 @@ function Navigation() {
 export default function App() {
   return <BrowserRouter><div className="min-h-screen bg-slate-50"><Navigation/><main className="mx-auto max-w-7xl px-4 py-8 sm:px-6"><Routes><Route path="/" element={<Dashboard/>}/><Route path="/patients" element={<Patients/>}/><Route path="/appointments" element={<Appointments/>}/><Route path="/login" element={<Login/>}/><Route path="/register" element={<Register/>}/><Route path="*" element={<Dashboard/>}/></Routes></main><footer className="mt-12 border-t border-slate-200 bg-white px-4 py-5 text-center text-xs text-slate-400">HMS demo · Do not use for real patient care without security, privacy, and clinical validation.</footer></div></BrowserRouter>;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672

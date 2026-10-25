@@ -1,6 +1,49 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+// Register User
+const registerUser = async (req, res) => {
+  const { name, email, password, role } = req.body;
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ message: "User already exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ name, email, password: hashedPassword, role });
+    await user.save();
+
+    res.json({ message: "User registered successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Login User
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({ token, user: { id: user._id, name: user.name, role: user.role } });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+=======
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 const Patient = require("../models/Patient");
 const { DEPARTMENTS } = require("../models/User");
 const safeUser = (u) => ({ id: u._id, name: u.name, email: u.email, role: u.role, department: u.department || "" });
@@ -46,4 +89,8 @@ const loginUser = async (req, res) => {
     return res.status(500).json({ message: "Could not log in." });
   }
 };
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 module.exports = { registerUser, loginUser };

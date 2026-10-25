@@ -6,3 +6,7 @@ build/
 !.env.example
 npm-debug.log*
 .DS_Store
+<<<<<<< HEAD
+=======
+powershell.cmd
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672

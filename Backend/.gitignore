@@ -1,5 +1,15 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+node_modules/
+=======
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 node_modules/
 .env
 .env.*
 !.env.example
 npm-debug.log*
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672

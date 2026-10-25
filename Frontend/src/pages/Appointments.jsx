@@ -1,9 +1,66 @@
 import React, { useEffect, useState } from "react";
 import API from "../services/api";
+<<<<<<< HEAD
 const today = () => { const n=new Date(); return new Date(n.getTime()-n.getTimezoneOffset()*60000).toISOString().slice(0,10); };
 const fmt = (v) => v ? new Date(v).toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"}) : "—";
 const FEES = {"Cardiology":900,"Cardiac Surgery":1800,"Orthopedics":700,"Neurology":1000,"Neurosurgery":2000,"Pediatrics":600,"Gynecology":750,"General Medicine":500,"Dermatology":650};
 const TIME_SLOTS = ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","14:00","14:30","15:00","15:30","16:00"];
+=======
+<<<<<<< HEAD
+
+function Appointments() {
+  const [appointments, setAppointments] = useState([]);
+  const [newAppt, setNewAppt] = useState({ patient: "", doctor: "", date: "" });
+
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
+
+  const fetchAppointments = async () => {
+    const { data } = await API.get("/appointments");
+    setAppointments(data);
+  };
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    await API.post("/appointments", newAppt);
+    setNewAppt({ patient: "", doctor: "", date: "" });
+    fetchAppointments();
+  };
+
+  return (
+    <div>
+      <h2 className="text-xl font-bold text-blue-700">Appointments</h2>
+      
+      <form onSubmit={handleAdd} className="mt-4 p-4 border rounded shadow-md">
+        <input type="text" placeholder="Patient ID" value={newAppt.patient}
+          onChange={(e) => setNewAppt({ ...newAppt, patient: e.target.value })}
+          className="border p-2 mr-2" required />
+        <input type="text" placeholder="Doctor Name" value={newAppt.doctor}
+          onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })}
+          className="border p-2 mr-2" required />
+        <input type="date" value={newAppt.date}
+          onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })}
+          className="border p-2 mr-2" required />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">Add</button>
+      </form>
+
+      <ul className="mt-4">
+        {appointments.map((a) => (
+          <li key={a._id} className="border p-2 my-2 rounded">
+            Patient: {a.patient} | Doctor: {a.doctor} | Date: {new Date(a.date).toLocaleDateString()}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Appointments;
+=======
+const today = () => { const n=new Date(); return new Date(n.getTime()-n.getTimezoneOffset()*60000).toISOString().slice(0,10); };
+const fmt = (v) => v ? new Date(v).toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"}) : "—";
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 export default function Appointments() {
   const [appointments,setAppointments]=useState([]); const [patients,setPatients]=useState([]); const [doctors,setDoctors]=useState([]);
   const [beds,setBeds]=useState({totalBeds:50,occupiedBeds:0,availableBeds:50}); const [form,setForm]=useState({patient:"",doctor:"",date:"",time:"09:00"});
@@ -33,8 +90,13 @@ export default function Appointments() {
       <label className="text-sm font-medium">Patient<select className="form-control mt-1" value={user?.role==="patient"?(patients[0]?._id||""):form.patient} onChange={e=>setForm({...form,patient:e.target.value})} required disabled={user?.role==="patient"}><option value="">Select patient</option>{patients.map(p=><option key={p._id} value={p._id}>{p.name} · {p.patientId}</option>)}</select></label>
       <label className="text-sm font-medium">Doctor<select className="form-control mt-1" value={form.doctor} onChange={e=>setForm({...form,doctor:e.target.value})} required><option value="">Select doctor</option>{doctors.filter(d=>user?.role!=="doctor" || d._id===user.id).map(d=><option key={d._id} value={d._id}>{d.name} · {d.department}</option>)}</select></label>
       <label className="text-sm font-medium">Appointment date<input className="form-control mt-1" type="date" min={today()} value={form.date} onChange={e=>setForm({...form,date:e.target.value})} required /></label>
+<<<<<<< HEAD
       <label className="text-sm font-medium">Available appointment slot<select className="form-control mt-1" value={form.time} onChange={e=>setForm({...form,time:e.target.value})} required>{TIME_SLOTS.map(t=><option key={t} value={t}>{t}</option>)}</select><span className="mt-1 block text-xs text-slate-500">Demo slots · 9 AM–12 PM and 2 PM–4 PM. Availability is confirmed when the booking is submitted.</span></label>
       <div className="rounded-xl bg-blue-50 p-3 text-sm text-blue-900 md:col-span-2">Estimated consultation charge: <strong>₹{FEES[doctors.find(d=>d._id===form.doctor)?.department]||"—"}</strong> <span className="text-blue-700">· excludes tests, procedures and admission charges</span></div><button className="primary-button md:col-span-2">Book appointment</button>
+=======
+      <label className="text-sm font-medium">Appointment time<input className="form-control mt-1" type="time" value={form.time} onChange={e=>setForm({...form,time:e.target.value})} required /></label>
+      <button className="primary-button md:col-span-2">Book appointment</button>
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
     </form>{!patients.length&&<p className="mt-3 text-sm text-amber-700">No patient record is linked to your account. Register a patient account first.</p>}{!doctors.length&&<p className="mt-1 text-sm text-amber-700">No doctors registered yet. Register doctor accounts with departments first.</p>}</section>
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><div className="border-b border-slate-100 px-5 py-4"><h2 className="font-semibold">Appointment list</h2><p className="mt-1 text-sm text-slate-500">Doctors can update admission and room/ward after reviewing a patient.</p></div>
       {busy?<p className="p-5 text-slate-500">Loading appointments…</p>:appointments.length?<div className="divide-y divide-slate-100">{appointments.map(a=>{const v=admission[a._id]||{status:a.patient?.status==="admitted"?"admitted":"not_admitted",roomNumber:a.patient?.roomNumber||""};const canManage=user?.role==="doctor"||user?.role==="admin";return <article key={a._id} className="p-5"><div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="font-semibold text-slate-900">{a.patient?.name||"Patient"} <span className="text-slate-400">·</span> Dr. {a.doctor?.name||"Doctor"}</h3><p className="mt-1 text-sm text-slate-500">{a.doctor?.department||"Department not set"} · {fmt(a.date)}</p></div><div className="flex flex-wrap gap-2"><span className="status-pill status-gray">{a.status}</span><span className={`status-pill ${a.patient?.status==="admitted"?"status-green":"status-gray"}`}>{a.patient?.status==="admitted"?`Admitted · Room ${a.patient.roomNumber}`:"Not admitted"}</span></div></div>
@@ -43,3 +105,7 @@ export default function Appointments() {
     </section>
   </div>;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672

@@ -43,8 +43,16 @@ jobs:
           context: ./Frontend
           file: ./Frontend/Dockerfile
           push: true
+<<<<<<< HEAD
           build-args: |
             VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
+=======
+<<<<<<< HEAD
+=======
+          build-args: |
+            VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/hms-frontend:latest
             ${{ secrets.DOCKER_USERNAME }}/hms-frontend:${{ github.sha }}

@@ -1,4 +1,46 @@
 const express = require("express");
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+const Patient = require("../models/Patient");
+
+const router = express.Router();
+
+// Add new patient
+router.post("/", async (req, res) => {
+  try {
+    const { patientId, name, age, status } = req.body;
+    const patient = new Patient({ patientId, name, age, status });
+    await patient.save();
+    res.json(patient);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get all patients
+router.get("/", async (req, res) => {
+  try {
+    const patients = await Patient.find();
+    res.json(patients);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get patient by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const patient = await Patient.findById(req.params.id);
+    if (!patient) return res.status(404).json({ message: "Patient not found" });
+    res.json(patient);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+=======
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 const mongoose = require("mongoose");
 const Patient = require("../models/Patient");
 const authMiddleware = require("../middleware/authMiddleware");
@@ -42,4 +84,8 @@ router.get("/:id", async (req, res) => {
     res.json(patient);
   } catch (err) { console.error(err.message); res.status(500).json({ message: "Could not load patient." }); }
 });
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 module.exports = router;

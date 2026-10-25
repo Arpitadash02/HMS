@@ -1,3 +1,37 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    container_name: hms-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: hms-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    container_name: hms-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+=======
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 services:
   mongo:
     image: mongo:7
@@ -36,5 +70,9 @@ services:
     depends_on:
       - backend
 
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 00f752cfc5a6447c97683a266c1f81bbe8aae672
 volumes:
   mongo_data:
