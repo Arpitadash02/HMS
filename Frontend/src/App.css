@@ -1,0 +1,12 @@
+#root { min-height: 100vh; }
+.form-control { display: block; width: 100%; border: 1px solid #cbd5e1; border-radius: .65rem; background: #fff; padding: .7rem .8rem; color: #0f172a; outline: none; }
+.form-control:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgb(37 99 235 / 12%); }
+.form-control:disabled { background: #f1f5f9; color: #64748b; cursor: not-allowed; }
+.primary-button { display: inline-flex; align-items: center; justify-content: center; border-radius: .7rem; background: #1d4ed8; padding: .72rem 1rem; color: white; font-weight: 700; transition: background .15s ease; }
+.primary-button:hover { background: #1e40af; }
+.secondary-button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #cbd5e1; border-radius: .7rem; background: white; padding: .62rem .9rem; color: #334155; font-size: .875rem; font-weight: 600; }
+.secondary-button:hover { background: #f8fafc; }
+.stat-card { border: 1px solid #e2e8f0; border-radius: 1rem; background: white; padding: 1.25rem; box-shadow: 0 1px 2px rgb(15 23 42 / 3%); }
+.status-pill { display: inline-flex; align-items: center; border-radius: 9999px; padding: .25rem .6rem; font-size: .72rem; font-weight: 700; text-transform: capitalize; }
+.status-green { background: #dcfce7; color: #166534; }
+.status-gray { background: #f1f5f9; color: #475569; }
